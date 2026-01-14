@@ -1,126 +1,158 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>波の伝わり方</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>波の伝わり方</title>
 
-<body>
-  <!-- 背景（最背面） -->
-  <div class="background"></div>
-
-  <!-- ホームボタン（右上） -->
-  <div class="home-button">🏠</div>
-
-  <!-- メインコンテンツ -->
-  <main class="content">
-    <h1>
-      波<span class="ruby">（なみ）</span>の
-      伝<span class="ruby">（つた）</span>わり
-      方<span class="ruby">（かた）</span>
-    </h1>
-
-    <div class="buttons">
-      <div class="mode-button">モード1</div>
-      <div class="mode-button">モード2</div>
-      <div class="mode-button">モード3</div>
-    </div>
-  </main>
-</body>
-</html>
-
-
-/* 全体 */
-body {
+<style>
+/* ===== 全体 ===== */
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-  height: 100vh;
 }
 
-/* 背景（最背面・全面） */
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-
+/* ===== 背景 ===== */
+body {
   background-image: url("background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  z-index: -1;
 }
 
-/* ホームボタン */
+/* ===== ふりがな ===== */
+ruby { ruby-position: over; }
+rt { font-size: 0.5em; }
+
+/* ===== ホームボタン ===== */
 .home-button {
   position: fixed;
-  top: 16px;
-  right: 16px;
-
-  background: white;
+  top: 12px;
+  right: 12px;
+  padding: 8px 14px;
   border: 2px solid black;
-  border-radius: 12px;
-  padding: 8px 12px;
-
-  font-size: 20px;
+  border-radius: 14px;
+  background: white;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.1s;
+  z-index: 10;
 }
 
-/* 中央コンテンツ */
-.content {
-  height: 100vh;
+.home-button:hover { background-color: #d0d0d0; }
+.home-button:active {
+  transform: scale(0.96);
+  background-color: #c8c8c8;
+}
+
+/* ===== 中央固定 ===== */
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
-  text-align: center;
 }
 
-/* タイトル */
-h1 {
-  background: rgba(255, 255, 255, 0.75);
-  padding: 20px 40px;
-  border-radius: 30px;
-  border: 2px solid black;
-
-  font-size: 36px;
+/* ===== タイトル ===== */
+.title {
+  font-size: 32px;
   margin-bottom: 40px;
 }
 
-/* ふりがな風 */
-.ruby {
-  font-size: 0.6em;
-}
-
-/* ボタン群（縦） */
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* モードボタン */
+/* ===== モードボタン ===== */
 .mode-button {
   width: 260px;
-  padding: 18px 0;
-
-  background: white;
+  padding: 16px;
+  margin: 16px 0;
   border: 2px solid black;
-  border-radius: 30px;
-
-  font-size: 22px;
+  border-radius: 20px;
+  background-color: white;
+  font-size: 18px;
+  text-align: center;
   cursor: pointer;
-
-  transition: transform 0.1s ease, background 0.1s ease;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
-.mode-button:hover {
-  background: #f0f0f0;
-  transform: scale(1.03);
+.mode-button:hover { background-color: #d0d0d0; }
+.mode-button:active {
+  transform: scale(0.97);
+  background-color: #c8c8c8;
 }
+
+/* ===== 右下URL ===== */
+.footer-link {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  padding: 8px 14px;
+  border: 2px solid black;
+  border-radius: 14px;
+  background: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.footer-link a {
+  color: black;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  background-color: #d0d0d0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ホーム -->
+<div class="home-button" onclick="goHome()">
+  <ruby>ホーム<rt></rt></ruby>
+</div>
+
+<!-- 中央 -->
+<div class="container">
+
+  <div class="title">
+    <ruby>波<rt>なみ</rt></ruby>の
+    <ruby>伝<rt>つた</rt></ruby>わり
+    <ruby>方<rt>かた</rt></ruby>
+  </div>
+
+  <div class="mode-button" onclick="selectMode(1)">
+    <ruby>身<rt>み</rt></ruby>近な<ruby>波<rt>なみ</rt></ruby>
+  </div>
+
+  <div class="mode-button" onclick="selectMode(2)">
+    <ruby>縦<rt>たて</rt></ruby>波・<ruby>横<rt>よこ</rt></ruby>波
+  </div>
+
+  <div class="mode-button" onclick="selectMode(3)">
+    <ruby>波<rt>なみ</rt></ruby>の<ruby>重<rt>かさ</rt></ruby>なり
+  </div>
+
+</div>
+
+<!-- 右下URL -->
+<div class="footer-link">
+  ホームページ：<br>
+  <a href="https://tus-scope.tokyo/" target="_blank">
+    東京理科大 理科教育サークル SCOPE
+  </a>
+</div>
+
+</body>
+</html>
+
+
 
