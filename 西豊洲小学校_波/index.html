@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>波の伝わり方</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- 背景（最背面） -->
+  <div class="background"></div>
+
+  <!-- ホームボタン（右上） -->
+  <div class="home-button">🏠</div>
+
+  <!-- メインコンテンツ -->
+  <main class="content">
+    <h1>
+      波<span class="ruby">（なみ）</span>の
+      伝<span class="ruby">（つた）</span>わり
+      方<span class="ruby">（かた）</span>
+    </h1>
+
+    <div class="buttons">
+      <div class="mode-button">モード1</div>
+      <div class="mode-button">モード2</div>
+      <div class="mode-button">モード3</div>
+    </div>
+  </main>
+</body>
+</html>
+
+
+/* 全体 */
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  height: 100vh;
+}
+
+/* 背景（最背面・全面） */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  z-index: -1;
+}
+
+/* ホームボタン */
+.home-button {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+
+  background: white;
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 8px 12px;
+
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* 中央コンテンツ */
+.content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+/* タイトル */
+h1 {
+  background: rgba(255, 255, 255, 0.75);
+  padding: 20px 40px;
+  border-radius: 30px;
+  border: 2px solid black;
+
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+/* ふりがな風 */
+.ruby {
+  font-size: 0.6em;
+}
+
+/* ボタン群（縦） */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* モードボタン */
+.mode-button {
+  width: 260px;
+  padding: 18px 0;
+
+  background: white;
+  border: 2px solid black;
+  border-radius: 30px;
+
+  font-size: 22px;
+  cursor: pointer;
+
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+
+.mode-button:hover {
+  background: #f0f0f0;
+  transform: scale(1.03);
+}
+
